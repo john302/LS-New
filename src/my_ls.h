@@ -3,6 +3,8 @@
 
 /* Emacs style mode select: -*- linux-c++ -*- */
 #include <math.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define PATH_MAX 4096 /* # chars in a path name including nul */
 
