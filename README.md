@@ -25,3 +25,20 @@ End of listing.
 </pre>
 
 Very simple, but very useful.
+
+<pre>
+  (<font color="#FF00D7"><b>jcartwright</b></font>@<font color="#5FAFD7"><b>2403-4800-25af-b00--2</b></font>) <font color="#FFD700"><b>192.168.1.5 New LS </b></font><span style="text-decoration-line:overline"><font color="#8787FF"><b> $ </b></font></span>build/my_program --about
+
+*--#--^^^^^^--#--* Simple LS clone. *--#--^^^^^^--#--*
+About this program:
+
+- A simple version of LS for Linux.
+
+- Coded by John Cartwright
+
+- 0.3. Release date: Dec 22.
+
+- Pass a folder to list contents, e,g
+
+- my_ls Documents.
+</pre>
