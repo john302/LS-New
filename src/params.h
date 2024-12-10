@@ -10,7 +10,7 @@ void print_about() {
     char _list[][50] = {"About this program:\n",
     "- A simple version of LS for Linux.\n",
     "- Coded by John Cartwright\n",
-    "- 0.3. Release date: Dec 22.\n",
+    "- 0.5. Release date: Dec 22.\n",
     "- Pass a folder to list contents, e,g\n",
     "- my_ls Documents.\n"};
 
