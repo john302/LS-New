@@ -74,13 +74,14 @@ int main(int argc, char *argv[]) {
     if (argc == 2 && strcmp(argv[1], "--about") == 0) {
         // Print the about information here
         print_about();  // Define this function to contain your about content
+
         return 0;  // Exit the program after printing about
     }
 
     if (argc == 1) {
         list_files(".");
     } else {
-        printf("%s", argv[1]);
+        //printf("%s", argv[1]);
         /**
          * Calls the function list_files with the provided command line argument.
          *
