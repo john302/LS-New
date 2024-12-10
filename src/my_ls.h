@@ -26,6 +26,8 @@ void list_files(const char *path) {
     struct dirent *entry;
     struct stat file_stat;
     char full_path[PATH_MAX];
+    char buf[80];
+    struct tm ts;
 
     /**
      * Opens a directory specified by the given path.
@@ -89,32 +91,28 @@ void list_files(const char *path) {
          *
          * @param file_stat The struct containing the file's status information.
          */
-        printf("%-4s", (file_stat.st_mode & S_IXOTH) ? "x." : "-.");
+        printf(" %-4s", (file_stat.st_mode & S_IXOTH) ? "x." : "-.");
 
-        printf(" %-4ld", file_stat.st_nlink); /* Print file hardlinks. */
-        printf(" %s ", user_info->pw_name); /* Print file owner username. */
-        printf(" %s", group_info->gr_name); /* Print file owner groupname. */
+        printf(" %-4ld", file_stat.st_nlink);
+        printf(" %s", user_info->pw_name); // Removed extra space
+        printf(" %s", group_info->gr_name); // Removed extra space
 
-            if (file_stat.st_size > 1000000) { /* Checking if we are seeing a
-                file that is more than one Megabyte. */
-            long file_size_bytes = file_stat.st_size;
-            double file_size_mb = (double)file_size_bytes / (1024.0 * 1024.0);
-            printf("\x1b[32m %-5.2f MB   \x1b[0m", round(file_size_mb));
-            }
-            else if (file_stat.st_size > 1000) { /* Checking if we are seeing a
-                file that is more than one Kilobyte. */
-            long file_size_bytes = file_stat.st_size;
-            double file_size_kb = (double)file_size_bytes / 1024.0;
-            printf("\x1b[36m %-5.2f KB   \x1b[0m", round(file_size_kb));
-            } else {
-                /* Otherwise, the filesize is in bytes and we just print this.
-                 * Not too hard.
-                */
+        if (file_stat.st_size > 1000000) {
+    		  long file_size_bytes = file_stat.st_size;
+    		  double file_size_mb = (double)file_size_bytes / (1024.0 * 1024.0);
+    		printf(" %-5.2fMB \t", round(file_size_mb)); // Removed extra space
+        } else if (file_stat.st_size > 1000) {
+    	    long file_size_bytes = file_stat.st_size;
+    	    double file_size_kb = (double)file_size_bytes / 1024.0;
+    		printf(" %-5.2fKB \t", round(file_size_kb)); // Removed extra space
+        } else {
+    	    printf(" %-6ld\t", file_stat.st_size);
+        }
 
-               printf("\x1b[35m %-6ld B   \x1b[0m", file_stat.st_size);
-            }
-        printf(" %ld ", file_stat.st_mtime);
-        printf("\x1b[33m %s \x1b[0m\n", entry->d_name);
+        ts = *localtime(&file_stat.st_mtime); // Convert the epoch time to local time format.
+        strftime(buf, sizeof(buf), "%m-%d %H:%M:%S", &ts); // Set a nice strftime format string.
+        printf("%s \t", buf); // Print the file date easily.
+        printf(" %s\n", entry->d_name); // Print the filename.
     }
 
     /**
